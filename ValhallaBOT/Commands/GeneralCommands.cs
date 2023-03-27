@@ -227,8 +227,22 @@ namespace ValhallaBOT.Commands
 
             await ctx.Channel.SendMessageAsync(helpMessage);
         }
+        //
+        [Command("dev")]
+        [Cooldown(1, 60, CooldownBucketType.User)]
+        public async Task devCommands(CommandContext ctx)
+        {
 
+                 var embedSenddevMSG = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+                .WithTitle("Valhalla")
+                .AddField("Developed by : ", "Aguslxrd#0410" + " | ") //Si se le agrega ,true al final quedan en fila
+                .AddField("All Rights Reserved to : ", "DevClub" + " | ") //Si se le agrega ,true al final quedan en fila
+                .WithColor(DiscordColor.Gold)
+                );
+            await ctx.RespondAsync(embedSenddevMSG);
 
+        }
 
     }
 
