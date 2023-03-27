@@ -25,3 +25,6 @@
 !ayuda - > Despliega un menu con botones y funciones de ayuda del bot.
 </h5>
 </p>
+
+<br> </br>
+<h1>Guia de instalacion</h1>
