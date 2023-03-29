@@ -13,6 +13,7 @@ namespace ValhallaBOT
 
             var bot = new bot();
             bot.RunAsync().GetAwaiter().GetResult();
+            
 
         }
     }

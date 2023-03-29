@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ValhallaBOT.Commands;
 using ValhallaBOT.SlashCommands;
+using ValhallaBOT.StaffCmds;
 
 namespace ValhallaBOT
 {
@@ -51,7 +52,7 @@ namespace ValhallaBOT
             });
             //
 
-            Client.ComponentInteractionCreated += ButtonPressResponse;
+            //Client.ComponentInteractionCreated += ButtonPressResponse;
 
             //COMANDOS
             var commandsConfig = new CommandsNextConfiguration()
@@ -70,6 +71,7 @@ namespace ValhallaBOT
             //slashCommands
             var slashCommandsConfig = Client.UseSlashCommands();
             slashCommandsConfig.RegisterCommands<UtilsSlashCommands>(805650345061122098);
+            slashCommandsConfig.RegisterCommands<Moderation>(805650345061122098);
 
 
 
@@ -113,7 +115,7 @@ namespace ValhallaBOT
         //////////////////////////COOLDOWN
         ///
 
-        private async Task ButtonPressResponse(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
+        /*private async Task ButtonPressResponse(DiscordClient sender, DSharpPlus.EventArgs.ComponentInteractionCreateEventArgs e)
         {
             if (e.Interaction.Data.CustomId == "IpButton")
             {
@@ -132,7 +134,7 @@ namespace ValhallaBOT
                 await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(tiendacmdsend));
             }
 
-        }//task async
+        }//task async*/
 
 
 

@@ -208,34 +208,14 @@ namespace ValhallaBOT.Commands
 
         }
 
-        [Command("ayuda")]
-        [Cooldown(1, 60, CooldownBucketType.User)]
-        public async Task AyudaCommands(CommandContext ctx)
-        {
-
-            var webBoton = new DiscordButtonComponent(ButtonStyle.Success, "webButton", "Web");
-            var tiendaBoton = new DiscordButtonComponent(ButtonStyle.Success, "tiendaButton", "Tienda");
-            var ipBoton = new DiscordButtonComponent(ButtonStyle.Success, "IpButton", "IP");
-
-            var helpMessage = new DiscordMessageBuilder()
-                .AddEmbed(new DiscordEmbedBuilder()
-                .WithColor(DiscordColor.Gold)
-                .WithTitle("Menu de ayuda")
-                .WithDescription("Selecciona el boton del cual quieres recibir ayuda.")
-                )
-                .AddComponents(webBoton, tiendaBoton, ipBoton);
-
-            await ctx.Channel.SendMessageAsync(helpMessage);
-        }
-        //
-        [Command("dev")]
+        [Command("info")]
         [Cooldown(1, 60, CooldownBucketType.User)]
         public async Task devCommands(CommandContext ctx)
         {
 
                  var embedSenddevMSG = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("Valhalla")
+                .WithTitle("ValhallaClub")
                 .AddField("Developed by : ", "Aguslxrd#0410" + " | ") //Si se le agrega ,true al final quedan en fila
                 .AddField("All Rights Reserved to : ", "DevClub" + " | ") //Si se le agrega ,true al final quedan en fila
                 .WithColor(DiscordColor.Gold)
@@ -243,6 +223,25 @@ namespace ValhallaBOT.Commands
             await ctx.RespondAsync(embedSenddevMSG);
 
         }
+        //
+        [Command("ayuda")]
+        [Cooldown(1, 60, CooldownBucketType.User)]
+        public async Task infoCommands(CommandContext ctx)
+        {
+
+            var embedSendInfoMSG = new DiscordMessageBuilder()
+           .AddEmbed(new DiscordEmbedBuilder()
+           .WithTitle("ValhallaClub")
+                .AddField("Lee las reglas en: ", "#Rules " + " | ") 
+                .AddField("Nuestras redes con: ", "!redes" + " | ")
+                .AddField("Entra en nuestro servidor: ", "!ip" + " | ")
+           .WithColor(DiscordColor.Gold)
+           );
+            await ctx.RespondAsync(embedSendInfoMSG);
+
+        }
+        
+
 
     }
 
