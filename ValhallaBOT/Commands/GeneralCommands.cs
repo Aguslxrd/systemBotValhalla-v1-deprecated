@@ -14,16 +14,8 @@ namespace ValhallaBOT.Commands
 {
     public class GeneralCommands : BaseCommandModule
     {
-        /*[Command("ip")]
-        
-        public async Task IPCommand(CommandContext ctx)
-        {
 
-            await ctx.Channel.SendMessageAsync("ip:mc.valhallaclub.me");
-
-
-        }
-        //
+        /*
         [Command("calc")]
         public async Task Calculator(CommandContext ctx, int number1, int number2)
         {
@@ -42,7 +34,6 @@ namespace ValhallaBOT.Commands
 
                 .WithTitle("ValhallaClub")
                 .WithDescription("IP: mc.ValhallaClub.me")
-                //.WithUrl("www.valhallaclub.me")
                 .WithColor(DiscordColor.Gold)
                 );
 
@@ -65,6 +56,7 @@ namespace ValhallaBOT.Commands
                 .AddField("Tienda: ", "https://store.valhallaclub.me" + " | ")
                 .AddField("TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
                 .AddField("Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
+                .AddField("Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
 
 
                 .WithColor(DiscordColor.Gold)
@@ -135,6 +127,7 @@ namespace ValhallaBOT.Commands
                     count3++;
                 }//4
                 //fin foreach
+
             }
             int totalVotes = count1 + count2 + count3 + count4;
             //
@@ -240,7 +233,33 @@ namespace ValhallaBOT.Commands
             await ctx.RespondAsync(embedSendInfoMSG);
 
         }
-        
+        //Status de playing/jugando
+        [Command("setactivity")]
+        public async Task setactivity(CommandContext ctx)
+        {
+            if (ctx.Member.Permissions.HasPermission(Permissions.Administrator))
+            {
+                DiscordActivity activity = new DiscordActivity();
+                DiscordClient discord = ctx.Client;
+                //input = Console.ReadLine();
+                activity.Name = "Yggdrasil";
+                await discord.UpdateStatusAsync(activity);
+                await ctx.RespondAsync("Actividad establecida!");
+
+                return;
+            }
+            else 
+            {
+                await ctx.RespondAsync("No tienes permiso para ejecutar este comando.");
+            }
+        }
+        /*[Command("senddm")]           //CODIGO PARA ENVIAR DMS
+        public async Task SendDMExample(CommandContext ctx)
+        {
+            var DMChannel = await ctx.Member.CreateDmChannelAsync();
+            await DMChannel.SendMessageAsync("Test");
+        }*/
+
 
 
     }

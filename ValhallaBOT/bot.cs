@@ -7,6 +7,7 @@ using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using ValhallaBOT.Commands;
 using ValhallaBOT.SlashCommands;
 using ValhallaBOT.StaffCmds;
+using ValhallaBOT.StreamersNotifys;
 
 namespace ValhallaBOT
 {
@@ -27,8 +30,13 @@ namespace ValhallaBOT
 
         public CommandsNextExtension Commands { get; private set; }
 
+        private YTVideoAlert _video = new YTVideoAlert();
+        private YTVideoAlert temp = new YTVideoAlert();
+        private YTEngine _YTEngine = new YTEngine();
+
         public async Task RunAsync()
         {
+
             //config
             var json = string.Empty;
             using (var fs = File.OpenRead("config.json"))
@@ -43,6 +51,8 @@ namespace ValhallaBOT
                 Token = configJSON.Token,
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
+                MinimumLogLevel = LogLevel.Debug,
+                //UseInternalLogHandler = true
             };
 
             Client = new DiscordClient(config);
@@ -72,13 +82,17 @@ namespace ValhallaBOT
             var slashCommandsConfig = Client.UseSlashCommands();
             slashCommandsConfig.RegisterCommands<UtilsSlashCommands>(805650345061122098);
             slashCommandsConfig.RegisterCommands<Moderation>(805650345061122098);
+            
 
 
 
-            //
+            //conexion para el bot online.
 
 
             await Client.ConnectAsync();
+            await Task.Delay(-1);
+            ulong channelIdToNotify = 974383829575933992; //Discord channel ID
+            await VideoNotifierTimer(_YTEngine.channelId, _YTEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
         }
         //////////////////////////COOLDOWN
@@ -135,7 +149,33 @@ namespace ValhallaBOT
             }
 
         }//task async*/
+        private async Task VideoNotifierTimer(string channelId, string apiKey, DiscordClient client, ulong channelIdToNotify)
+        {
+            var timer = new Timer(900000); //15 min
+            timer.Elapsed += async (sender, e) =>
+            {
+                _video = _YTEngine.GetLatestVideo(channelId, apiKey);
+                var lastCheckedAt = DateTime.Now;//Guarda cuando fue el ultimo check
+                if(_video != null)
+                {
+                    if(_video.PublishedVideoAt < lastCheckedAt)
+                    {
+                        var message = $"Nuevo video | **{_video.videoTitle}** \n" +
+                                     $"Publicado hace: {_video.PublishedVideoAt} \n" +
+                                     "URL: " + _video.videoUrl;
 
+                        await client.GetChannelAsync(channelIdToNotify).Result.SendMessageAsync(message);
+                        temp = _video;
+                    }
+                    else
+                    {
+                        Console.WriteLine("[vEngine] - - > Currently no new videos were found.");
+                    }
+                }
+            };
+            timer.Start();
+
+        }
 
 
 
