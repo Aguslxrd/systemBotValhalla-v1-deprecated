@@ -30,6 +30,7 @@ namespace ValhallaBOT
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(valhallaLogo);
             Console.ResetColor();
+            //
             var bot = new bot();
             bot.RunAsync().GetAwaiter().GetResult();
             //

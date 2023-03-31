@@ -6,6 +6,7 @@ using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -235,12 +236,14 @@ namespace ValhallaBOT.Commands
         }
         //Status de playing/jugando
         [Command("setactivity")]
+        [Cooldown(1, 60, CooldownBucketType.User)]
         public async Task setactivity(CommandContext ctx)
         {
             if (ctx.Member.Permissions.HasPermission(Permissions.Administrator))
             {
                 DiscordActivity activity = new DiscordActivity();
                 DiscordClient discord = ctx.Client;
+                activity.ActivityType = ActivityType.Watching;
                 //input = Console.ReadLine();
                 activity.Name = "Yggdrasil";
                 await discord.UpdateStatusAsync(activity);
@@ -253,13 +256,30 @@ namespace ValhallaBOT.Commands
                 await ctx.RespondAsync("No tienes permiso para ejecutar este comando.");
             }
         }
-        /*[Command("senddm")]           //CODIGO PARA ENVIAR DMS
-        public async Task SendDMExample(CommandContext ctx)
+        /*
+        [Command("senddm")]//CODIGO PARA ENVIAR DMS
+        public async Task SendDMExample(CommandContext ctx, [Option("Usuario", "El usuario al cual quieres enviar un dm")] DiscordUser usuario)
         {
             var DMChannel = await ctx.Member.CreateDmChannelAsync();
             await DMChannel.SendMessageAsync("Test");
         }*/
+        //
+        [Command("ping"), Description("Genera un ping al bot y te devuelve tu latencia/ping/ms."), Aliases("latencia")]
+        [Cooldown(1, 60, CooldownBucketType.User)]
+        //[SuppressMessage("Style", "IDE0022", Justification = "Paragraph.")]
+        public async Task PingAsync(CommandContext ctx)
+        {
 
+            var embedPINGMessage = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+
+                .WithTitle("ValhallaClub")
+                .WithDescription($"Tu ping es de: " + ctx.Client.Ping + "ms.")
+                .WithColor(DiscordColor.Gold)
+                );
+            await ctx.RespondAsync(embedPINGMessage);
+
+        }
 
 
     }
