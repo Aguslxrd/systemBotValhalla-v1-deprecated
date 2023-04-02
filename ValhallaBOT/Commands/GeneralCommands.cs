@@ -6,8 +6,10 @@ using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,7 @@ namespace ValhallaBOT.Commands
                 .WithTitle("ValhallaClub")
                 .WithDescription("IP: mc.ValhallaClub.me")
                 .WithColor(DiscordColor.Gold)
+                .WithFooter("ValhallaClub ")
                 );
 
 
@@ -58,6 +61,7 @@ namespace ValhallaBOT.Commands
                 .AddField("TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
                 .AddField("Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
                 .AddField("Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
+                .WithFooter("ValhallaClub ")
 
 
                 .WithColor(DiscordColor.Gold)
@@ -166,10 +170,12 @@ namespace ValhallaBOT.Commands
         [Description("Comando para ver el estado de la maquina y sus servidores activos")]
         public async Task sendStatusEmbed(CommandContext ctx)
         {
-            if (ctx.Guild.Id == 805650345061122098) //GUILD ES SERVIDOR PUEDE SER CHANNEL ETC, es por id
-            {
-    
-                            var embedStatusMessage = new DiscordMessageBuilder()
+            long memoryUsedWitoutCalc = GC.GetTotalMemory(true);
+            long memoryUsed;
+            memoryUsed = memoryUsedWitoutCalc / 1048576;
+            memoryUsed = memoryUsed+ 30;
+
+            var embedStatusMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
 
                 .WithTitle("Status - - > ValhallaClub")
@@ -177,17 +183,17 @@ namespace ValhallaBOT.Commands
                 .AddField("Bungeecord: ", "webHook de la ram del Bungee")
                 .AddField("Lobby: ", "webHook de la ram del lobby")
                 .AddField("vClans: ", "webHook de la ram de vClans")
+                .AddField(
+                "Info",
+                    $"- Memory: " + memoryUsed + "mb\n" +
+                    $"- Runtime: {RuntimeInformation.OSDescription}\n" +
+                    $"- Uptime: {DateTime.Now - Process.GetCurrentProcess().StartTime:dd\\.hh\\:mm\\:ss}",
+                false)
                 .WithColor(DiscordColor.Gold)
                 );
 
                 await ctx.RespondAsync(embedStatusMessage);
 
-            }
-            else
-            {
-                await ctx.RespondAsync("Este comando no puede ser ejecutado en este servidor.");
-
-            }
 
         }
         [Command("survey")]
@@ -224,11 +230,15 @@ namespace ValhallaBOT.Commands
         {
 
             var embedSendInfoMSG = new DiscordMessageBuilder()
-           .AddEmbed(new DiscordEmbedBuilder()
-           .WithTitle("ValhallaClub")
-                .AddField("Lee las reglas en: ", "#Rules " + " | ") 
+                .AddEmbed(new DiscordEmbedBuilder()
+                .WithTitle("ValhallaClub")
+                .AddField("Ayudanos votando en",
+                 "[Votar](https://topg.org/minecraft-servers/server-652361)!")
+                .AddField("Lee las reglas en: ", "#Reglas " + " | ") 
                 .AddField("Nuestras redes con: ", "!redes" + " | ")
                 .AddField("Entra en nuestro servidor: ", "!ip" + " | ")
+                .WithUrl("https://www.valhallaclub.me")
+                .WithFooter("ValhallaClub ")
            .WithColor(DiscordColor.Gold)
            );
             await ctx.RespondAsync(embedSendInfoMSG);
@@ -266,19 +276,47 @@ namespace ValhallaBOT.Commands
         //
         [Command("ping"), Description("Genera un ping al bot y te devuelve tu latencia/ping/ms."), Aliases("latencia")]
         [Cooldown(1, 60, CooldownBucketType.User)]
-        //[SuppressMessage("Style", "IDE0022", Justification = "Paragraph.")]
         public async Task PingAsync(CommandContext ctx)
         {
 
             var embedPINGMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
                 .WithTitle("ValhallaClub")
                 .WithDescription($"Tu ping es de: " + ctx.Client.Ping + "ms.")
                 .WithColor(DiscordColor.Gold)
                 );
             await ctx.RespondAsync(embedPINGMessage);
 
+        }
+        [Command("invitar"), Description("Envia un msg con el enlace de invitacion del discord de valhalla")]
+        [Cooldown(1, 60, CooldownBucketType.User)]
+        public async Task invitarLink(CommandContext ctx)
+        {
+            var embedInvitarLinkMSG = new DiscordMessageBuilder()
+                .AddEmbed(new DiscordEmbedBuilder()
+                .WithTitle("ValhallaClub")
+                .WithUrl("https://www.valhallaclub.me")
+                .AddField("Enlace de discord: ",
+                 "[Invitar](https://discord.valhallaclub.me)!")
+
+
+                );
+            await ctx.RespondAsync(embedInvitarLinkMSG);
+        }
+        [Command("saludar"), Description("Saluda a un usuaro especifico (@usuario)."), Aliases("hello", "hi")]
+        public async Task Greet(CommandContext ctx, [Description("use: saludar (@usuario).")] DiscordMember member) // this command takes a member as an argument; you can pass one by username, nickname, id, or mention
+        {
+
+
+            // let's trigger a typing indicator to let
+            // users know we're working
+            await ctx.TriggerTypingAsync();
+
+            
+            var emoji = DiscordEmoji.FromName(ctx.Client, ":wave:");
+
+            
+            await ctx.RespondAsync($"{emoji} Hola, {member.Mention}!");
         }
 
 

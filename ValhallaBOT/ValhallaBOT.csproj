@@ -179,6 +179,7 @@
     <Compile Include="StaffCmds\Moderation.cs" />
     <Compile Include="StreamersNotifys\YTEngine.cs" />
     <Compile Include="StreamersNotifys\YTVideoAlert.cs" />
+    <Compile Include="vEngineCom\vEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
