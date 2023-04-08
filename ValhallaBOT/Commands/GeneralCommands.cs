@@ -34,7 +34,7 @@ namespace ValhallaBOT.Commands
         {
             var embedIPMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-
+                .WithUrl("https://www.valhallaclub.me")
                 .WithTitle("ValhallaClub")
                 .WithDescription("IP: mc.ValhallaClub.me")
                 .WithColor(DiscordColor.Gold)
@@ -55,12 +55,13 @@ namespace ValhallaBOT.Commands
         {
             var embedSendRedes = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("Valhalla")
+                .WithTitle("ValhallaClub")
+                .WithUrl("https://www.valhallaclub.me")
                 .AddField("➤ Web: ", "https://www.valhallaclub.me" + " | ") //Si se le agrega ,true al final quedan en fila
                 .AddField("➤ Tienda: ", "https://store.valhallaclub.me" + " | ")
                 .AddField("➤ TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
                 .AddField("➤ Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
-                .AddField("Instagram: ", "https://www.instagram.com/valhallatheserver/" + " | ")
+                .AddField("➤ Instagram: ", "https://www.instagram.com/valhallatheserver/" + " | ")
                 .AddField("➤ Nuestros Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
                 .WithFooter("ValhallaClub ")
 
@@ -222,12 +223,14 @@ namespace ValhallaBOT.Commands
                 .AddEmbed(new DiscordEmbedBuilder()
                 .WithTitle("ValhallaClub")
                 .AddField("Ayudanos votando en",
-                 "[Votar](https://topg.org/minecraft-servers/server-652361)!")
+                 "[Votar](https://topg.org/minecraft-servers/server-652361)" + " | ")
                 .AddField("Lee las reglas en: ", "#Reglas " + " | ") 
                 .AddField("Nuestras redes con: ", "!redes" + " | ")
+                .AddField("Invita a tus amigos con: ", "!invitar" + " | ")
                 .AddField("Entra en nuestro servidor: ", "!ip" + " | ")
                 .WithUrl("https://www.valhallaclub.me")
                 .WithFooter("ValhallaClub ")
+                .WithImageUrl("https://media.tenor.com/7xn05yYuYq8AAAAC/alguien-ayudeme-por-favor-sujes.gif")
            .WithColor(DiscordColor.Gold)
            );
             await ctx.RespondAsync(embedSendInfoMSG);
@@ -258,8 +261,11 @@ namespace ValhallaBOT.Commands
 
         /*
         [Command("senddm")]//CODIGO PARA ENVIAR DMS
+        [Cooldown(1, 60, CooldownBucketType.User)]
+        [RequireRoles(RoleCheckMode.MatchNames, "Owner")]
         public async Task SendDMExample(CommandContext ctx, [Option("Usuario", "El usuario al cual quieres enviar un dm")] DiscordUser usuario)
         {
+            var member = (DiscordMember)usuario;
             var DMChannel = await ctx.Member.CreateDmChannelAsync();
             await DMChannel.SendMessageAsync("Test");
         }*/
@@ -286,10 +292,10 @@ namespace ValhallaBOT.Commands
                 .AddEmbed(new DiscordEmbedBuilder()
                 .WithTitle("ValhallaClub")
                 .WithUrl("https://www.valhallaclub.me")
-                .AddField("Enlace de discord: ",
-                 "[Invitar](https://discord.valhallaclub.me)!")
-
-
+                .AddField("Discord: ",
+                 "[discord.valhallaclub.me](https://discord.valhallaclub.me)")
+                .WithColor(DiscordColor.Gold)
+                .WithFooter("ValhallaClub ")
                 );
             await ctx.RespondAsync(embedInvitarLinkMSG);
         }/*
