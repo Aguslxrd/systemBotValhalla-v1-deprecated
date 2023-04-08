@@ -56,11 +56,12 @@ namespace ValhallaBOT.Commands
             var embedSendRedes = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
                 .WithTitle("Valhalla")
-                .AddField("Web: ", "https://www.valhallaclub.me" + " | ") //Si se le agrega ,true al final quedan en fila
-                .AddField("Tienda: ", "https://store.valhallaclub.me" + " | ")
-                .AddField("TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
-                .AddField("Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
-                .AddField("Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
+                .AddField("➤ Web: ", "https://www.valhallaclub.me" + " | ") //Si se le agrega ,true al final quedan en fila
+                .AddField("➤ Tienda: ", "https://store.valhallaclub.me" + " | ")
+                .AddField("➤ TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
+                .AddField("➤ Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
+                .AddField("Instagram: ", "https://www.instagram.com/valhallatheserver/" + " | ")
+                .AddField("➤ Nuestros Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
                 .WithFooter("ValhallaClub ")
 
 
@@ -173,7 +174,7 @@ namespace ValhallaBOT.Commands
             long memoryUsedWitoutCalc = GC.GetTotalMemory(true);
             long memoryUsed;
             memoryUsed = memoryUsedWitoutCalc / 1048576;
-            memoryUsed = memoryUsed+ 30;
+            memoryUsed = memoryUsed + 30;
 
             var embedStatusMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
@@ -186,7 +187,7 @@ namespace ValhallaBOT.Commands
                 .AddField(
                 "Info",
                     $"- Memory: " + memoryUsed + "mb\n" +
-                    $"- Runtime: {RuntimeInformation.OSDescription}\n" +
+                    $"- OS: {RuntimeInformation.OSDescription}\n" +
                     $"- Uptime: {DateTime.Now - Process.GetCurrentProcess().StartTime:dd\\.hh\\:mm\\:ss}",
                 false)
                 .WithColor(DiscordColor.Gold)
@@ -196,18 +197,6 @@ namespace ValhallaBOT.Commands
 
 
         }
-        [Command("survey")]
-        [Cooldown(1, 60, CooldownBucketType.User)]
-        [RequireRoles(RoleCheckMode.MatchNames, "Owner")]
-        public async Task SurveyCommands(CommandContext ctx, [Option("string", "Escribe lo que quieras")] string text)
-        {
-
-           
-            /// HACER LA LOGICA PARA LA ENCUESTA CON BOTONES DE SI Y NO
-
-
-        }
-
         [Command("info")]
         [Cooldown(1, 60, CooldownBucketType.User)]
         public async Task devCommands(CommandContext ctx)
@@ -247,15 +236,15 @@ namespace ValhallaBOT.Commands
         //Status de playing/jugando
         [Command("setactivity")]
         [Cooldown(1, 60, CooldownBucketType.User)]
-        public async Task setactivity(CommandContext ctx)
+        [RequireRoles(RoleCheckMode.MatchNames, "Owner")]
+        public async Task setactivity(CommandContext ctx, string actividad = "Yggdrasil")
         {
             if (ctx.Member.Permissions.HasPermission(Permissions.Administrator))
             {
                 DiscordActivity activity = new DiscordActivity();
                 DiscordClient discord = ctx.Client;
                 activity.ActivityType = ActivityType.Watching;
-                //input = Console.ReadLine();
-                activity.Name = "Yggdrasil";
+                activity.Name = actividad;
                 await discord.UpdateStatusAsync(activity);
                 await ctx.RespondAsync("Actividad establecida!");
 
@@ -265,7 +254,8 @@ namespace ValhallaBOT.Commands
             {
                 await ctx.RespondAsync("No tienes permiso para ejecutar este comando.");
             }
-        }
+        }//
+
         /*
         [Command("senddm")]//CODIGO PARA ENVIAR DMS
         public async Task SendDMExample(CommandContext ctx, [Option("Usuario", "El usuario al cual quieres enviar un dm")] DiscordUser usuario)
@@ -302,23 +292,23 @@ namespace ValhallaBOT.Commands
 
                 );
             await ctx.RespondAsync(embedInvitarLinkMSG);
-        }
+        }/*
         [Command("saludar"), Description("Saluda a un usuaro especifico (@usuario)."), Aliases("hello", "hi")]
-        public async Task Greet(CommandContext ctx, [Description("use: saludar (@usuario).")] DiscordMember member) // this command takes a member as an argument; you can pass one by username, nickname, id, or mention
+        [Cooldown(1, 120, CooldownBucketType.User)]
+        public async Task mencionBOT(CommandContext ctx, [Description("uso: saludar (@usuario).")] DiscordMember member) // obtiene por nickname, id,mencion
         {
 
 
-            // let's trigger a typing indicator to let
-            // users know we're working
+            // indicador de escritura...
             await ctx.TriggerTypingAsync();
 
             
-            var emoji = DiscordEmoji.FromName(ctx.Client, ":wave:");
+            var emoji = DiscordEmoji.FromName(ctx.Client, ":raised_hands:");
 
             
             await ctx.RespondAsync($"{emoji} Hola, {member.Mention}!");
-        }
-
+        }//
+        */
 
     }
 

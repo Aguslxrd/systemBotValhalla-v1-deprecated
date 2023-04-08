@@ -26,8 +26,8 @@ namespace ValhallaBOT.StaffCmds
 
                 var banMessage = new DiscordEmbedBuilder()
                 {
-                    Title = "Usuario baneado- >" + member.Username,
-                    Description = "Razon: " + razon,
+                    Title = "Usuario baneado - - > " + member.Username,
+                    Description = "Razon - - > " + razon,
                     Color = DiscordColor.Red
                     };
                 await ctx.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(banMessage));
