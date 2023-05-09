@@ -80,18 +80,18 @@ namespace ValhallaBOT
             Commands.CommandErrored += OnCommandError;
             //slashCommands
             var slashCommandsConfig = Client.UseSlashCommands();
-            slashCommandsConfig.RegisterCommands<UtilsSlashCommands>(805650345061122098);
-            slashCommandsConfig.RegisterCommands<Moderation>(805650345061122098);
+            slashCommandsConfig.RegisterCommands<UtilsSlashCommands>();
+            slashCommandsConfig.RegisterCommands<Moderation>();
             
 
 
 
-            //conexion para el bot online.
+           
 
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
-            ulong channelIdToNotify = 974383829575933992; //Discord channel ID
+            ulong channelIdToNotify = ; //Discord channel ID
             await VideoNotifierTimer(_YTEngine.channelId, _YTEngine.apiKey, Client, channelIdToNotify);
             await Task.Delay(-1);
         }
@@ -133,17 +133,17 @@ namespace ValhallaBOT
         {
             if (e.Interaction.Data.CustomId == "IpButton")
             {
-                string ipcmdsend = "IP: mc.valhallaclub.me";
+                string ipcmdsend = "IP: EXAMPLEIP.COM";
                 await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(ipcmdsend));
             //
             }else if(e.Interaction.Data.CustomId == "webButton")
             {
-                string webcmdsend = "https://www.valhallaclub.me";
+                string webcmdsend = "https://www.example.me";
                 await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(webcmdsend));
             //
-            }else if(e.Interaction.Data.CustomId == "tiendaButton")
+            }else if(e.Interaction.Data.CustomId == "shopButton")
             {
-                string tiendacmdsend = "https://store.valhallaclub.me";
+                string tiendacmdsend = "https://store.example.me";
 
                 await e.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(tiendacmdsend));
             }
@@ -169,7 +169,7 @@ namespace ValhallaBOT
                     }
                     else
                     {
-                        Console.WriteLine("[vEngine] - - > Currently no new videos were found.");
+                        Console.WriteLine("[Engine] - - > Currently no new videos were found.");
                     }
                 }
             };
