@@ -34,11 +34,11 @@ namespace ValhallaBOT.Commands
         {
             var embedIPMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithUrl("https://www.valhallaclub.me")
-                .WithTitle("ValhallaClub")
-                .WithDescription("IP: mc.ValhallaClub.me")
+                .WithUrl("https://www.example.me")
+                .WithTitle("example")
+                .WithDescription("IP: example.com")
                 .WithColor(DiscordColor.Gold)
-                .WithFooter("ValhallaClub ")
+                .WithFooter("example ")
                 );
 
 
@@ -55,15 +55,15 @@ namespace ValhallaBOT.Commands
         {
             var embedSendRedes = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("ValhallaClub")
-                .WithUrl("https://www.valhallaclub.me")
-                .AddField("➤ Web: ", "https://www.valhallaclub.me" + " | ") //Si se le agrega ,true al final quedan en fila
-                .AddField("➤ Tienda: ", "https://store.valhallaclub.me" + " | ")
-                .AddField("➤ TikTok: ", "https://www.tiktok.com/@valhallatheserver" + " | ")
-                .AddField("➤ Twitter: ", "https://twitter.com/server_Valhalla" + " | ")
-                .AddField("➤ Instagram: ", "https://www.instagram.com/valhallatheserver/" + " | ")
-                .AddField("➤ Nuestros Afiliados: ", "https://www.valhallaclub.me/afiliados" + " | ")
-                .WithFooter("ValhallaClub ")
+                .WithTitle("example")
+                .WithUrl("https://www.example.me")
+                .AddField("➤ Web: ", "https://www.example.me" + " | ") 
+                .AddField("➤ Tienda: ", "https://store.example.me" + " | ")
+                .AddField("➤ TikTok: ", "example" + " | ")
+                .AddField("➤ Twitter: ", "example" + " | ")
+                .AddField("➤ Instagram: ", "example" + " | ")
+                .AddField("➤ Nuestros Afiliados: ", "example" + " | ")
+                .WithFooter("example ")
 
 
                 .WithColor(DiscordColor.Gold)
@@ -180,11 +180,11 @@ namespace ValhallaBOT.Commands
             var embedStatusMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
 
-                .WithTitle("Status - - > ValhallaClub")
-                .WithDescription("IP: mc.ValhallaClub.me")
-                .AddField("Bungeecord: ", "webHook de la ram del Bungee")
-                .AddField("Lobby: ", "webHook de la ram del lobby")
-                .AddField("vClans: ", "webHook de la ram de vClans")
+                .WithTitle("Status - - > example") //Not finishe|No terminado
+                .WithDescription("IP: example")
+                .AddField("Something: ", "example")
+                .AddField("Something: ", "example")
+                .AddField("Something: ", "example")
                 .AddField(
                 "Info",
                     $"- Memory: " + memoryUsed + "mb\n" +
@@ -205,9 +205,9 @@ namespace ValhallaBOT.Commands
 
                  var embedSenddevMSG = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("ValhallaClub")
-                .AddField("Developed by : ", "Aguslxrd#0410" + " | ") //Si se le agrega ,true al final quedan en fila
-                .AddField("All Rights Reserved to : ", "DevClub" + " | ") //Si se le agrega ,true al final quedan en fila
+                .WithTitle("example")
+                .AddField("Developed by : ", "Aguslxrd#0410" + " | ") 
+                .AddField("All Rights Reserved to : ", "DevClub" + " | ") 
                 .WithColor(DiscordColor.Gold)
                 );
             await ctx.RespondAsync(embedSenddevMSG);
@@ -221,16 +221,16 @@ namespace ValhallaBOT.Commands
 
             var embedSendInfoMSG = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("ValhallaClub")
-                .AddField("Ayudanos votando en",
-                 "[Votar](https://topg.org/minecraft-servers/server-652361)" + " | ")
-                .AddField("Lee las reglas en: ", "#Reglas " + " | ") 
-                .AddField("Nuestras redes con: ", "!redes" + " | ")
-                .AddField("Invita a tus amigos con: ", "!invitar" + " | ")
-                .AddField("Entra en nuestro servidor: ", "!ip" + " | ")
-                .WithUrl("https://www.valhallaclub.me")
-                .WithFooter("ValhallaClub ")
-                .WithImageUrl("https://media.tenor.com/7xn05yYuYq8AAAAC/alguien-ayudeme-por-favor-sujes.gif")
+                .WithTitle("example")
+                .AddField("Something",
+                 "[LinkType](https://www.google.com)" + " | ")
+                .AddField("example: ", "#example " + " | ") 
+                .AddField("example: ", "!example" + " | ")
+                .AddField("example: ", "!example" + " | ")
+                .AddField("example: ", "!example" + " | ")
+                .WithUrl("https://www.example.me")
+                .WithFooter("Some footer ")
+                .WithImageUrl("example gif here")
            .WithColor(DiscordColor.Gold)
            );
             await ctx.RespondAsync(embedSendInfoMSG);
@@ -240,7 +240,7 @@ namespace ValhallaBOT.Commands
         [Command("setactivity")]
         [Cooldown(1, 60, CooldownBucketType.User)]
         [RequireRoles(RoleCheckMode.MatchNames, "Owner")]
-        public async Task setactivity(CommandContext ctx, string actividad = "Yggdrasil")
+        public async Task setactivity(CommandContext ctx, string actividad = "#Aguslxrd#0410")
         {
             if (ctx.Member.Permissions.HasPermission(Permissions.Administrator))
             {
@@ -277,44 +277,27 @@ namespace ValhallaBOT.Commands
 
             var embedPINGMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("ValhallaClub")
+                .WithTitle("example")
                 .WithDescription($"Tu ping es de: " + ctx.Client.Ping + "ms.")
                 .WithColor(DiscordColor.Gold)
                 );
             await ctx.RespondAsync(embedPINGMessage);
 
         }
-        [Command("invitar"), Description("Envia un msg con el enlace de invitacion del discord de valhalla")]
+        [Command("invitar"), Description("Envia un msg con el enlace de invitacion del discord de example")]
         [Cooldown(1, 60, CooldownBucketType.User)]
         public async Task invitarLink(CommandContext ctx)
         {
             var embedInvitarLinkMSG = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
-                .WithTitle("ValhallaClub")
-                .WithUrl("https://www.valhallaclub.me")
+                .WithTitle("example")
+                .WithUrl("https://www.example.me")
                 .AddField("Discord: ",
-                 "[discord.valhallaclub.me](https://discord.valhallaclub.me)")
+                 "[discord.example.me](https://discord.example.me)")
                 .WithColor(DiscordColor.Gold)
-                .WithFooter("ValhallaClub ")
+                .WithFooter("footer here ")
                 );
             await ctx.RespondAsync(embedInvitarLinkMSG);
-        }/*
-        [Command("saludar"), Description("Saluda a un usuaro especifico (@usuario)."), Aliases("hello", "hi")]
-        [Cooldown(1, 120, CooldownBucketType.User)]
-        public async Task mencionBOT(CommandContext ctx, [Description("uso: saludar (@usuario).")] DiscordMember member) // obtiene por nickname, id,mencion
-        {
-
-
-            // indicador de escritura...
-            await ctx.TriggerTypingAsync();
-
-            
-            var emoji = DiscordEmoji.FromName(ctx.Client, ":raised_hands:");
-
-            
-            await ctx.RespondAsync($"{emoji} Hola, {member.Mention}!");
-        }//
-        */
 
     }
 
