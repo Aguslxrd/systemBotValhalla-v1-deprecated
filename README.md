@@ -64,4 +64,7 @@
   
   
   <h7>Toda la documentacion utilizada en: https://discordnet.dev/api/index.html </h7>
+  
+  
+  <h8>esta version del codigo del bot no esta en un buen estado, codigo desordenado etc. </h8>
 
