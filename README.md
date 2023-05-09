@@ -14,7 +14,7 @@
 !redes - > Devuelve un mensaje "Embed" con las redes del servidor
 </h5>
 <h5>
--(Status) (Funciona solo en el discord SoftUP por seguridad)
+-
 !status - > Devuelve un mensaje "Embed" con las estadisticas del servidor
 </h5>
 <h5>
@@ -30,7 +30,7 @@
 </h5>
 
 <h5>
--!setactivity - > Establece el "Yggdrasil" viendo como estado (hardcodeado)
+-!setactivity - > Establece el "estado" del bot viendo como estado (hardcodeado)
 </h5>
 
 <h5>
@@ -60,6 +60,7 @@
 <h6>-(1) xbuild nombreSolucion.sln  -  - >  Compila con "xbuild"</h6>
 <h6>-(2) mono nombreBot.exe -  - > Ejecuta el .exe con "mono"</h6>
 <h6>-para ejecutarlo, el archivo config.json debe estar en la misma carpeta que el .exe, de lo contrario el bot no encontrara el token.</h6>
+  <h6>Recomendado usar docker para iniciarlizar el bot y apagarlo</h6>
   
   
   <h7>Toda la documentacion utilizada en: https://discordnet.dev/api/index.html </h7>
